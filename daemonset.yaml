@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind:  DaemonSet
+metadata: 
+  name: testing
+  namespace: deploy
+  labels:
+    app: testing
+spec:
+  selector: 
+    matchLabels:
+      app:  testing
+  template:
+    metadata:
+      labels:
+        app: testing
+    spec:
+      containers:
+      - name: testing   
+        image: bitbull/webserver
+        ports:
+        - containerPort: 80 

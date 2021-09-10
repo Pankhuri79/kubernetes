@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pi
+  namespace: deploy
+spec:
+  parallelism: 2
+  template:
+    spec:
+      containers:
+      - name: pi
+        image: perl
+        command: ["perl", "-Mbignum=bpi", "-wle", "print bpi(2000)"]
+      restartPolicy: OnFailure    
+  backoffLimit: 4 
+  activeDeadlineSeconds: 3  
+  completions: 3 

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy
+  namespace: testing 
+  labels:
+    app: test
+spec: 
+  replicas: 2
+  selector: 
+    matchLabels:
+      app: test
+  template:
+    metadata:
+      labels:
+        app: test      
+    spec:
+      containers:
+        - name: hello
+          image: gcr.io/central-academy-298905/myimage:latest
+          ports:
+          - containerPort: 80

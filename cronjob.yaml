@@ -1,0 +1,20 @@
+apiVersion: batch/v1beta1 
+kind: CronJob
+metadata:
+  name: testing
+  namespace: deploy
+spec:
+  schedule: "*/1 * * * *"
+  concurrencyPolicy: Replace
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: testing
+              image: busybox
+              imagePullPolicy: IfNotPresent
+              command: ["/bin/sh", "-ec", "sleep 40"]
+              #image: perl
+              #command: ["perl", "-Mbignum-bpi", "print bpi(2000)"]
+          restartPolicy: OnFailure    
